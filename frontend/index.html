@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marine Conservation Chatbot</title>
+    <link rel="icon" href="/favicon.ico" />
+  </head>
+  <body>
+    <div id="root">
+       <div class="chat-container">
+        <div class="chat-box" id="chatBox"></div>
+        <input type="text" id="userInput" placeholder="Ask me about marine conservation...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+    </div>
+    <script type="module" src="src/main.jsx">
+    const marineData = {
+            "ocean pollution": "Ocean pollution is caused by plastic waste, oil spills, and chemicals entering the sea, harming marine life.",
+            "coral reefs": "Coral reefs are vital marine ecosystems that provide habitat for fish and protect coastlines from erosion.",
+            "climate change": "Climate change causes ocean acidification and rising sea levels, affecting marine biodiversity.",
+            "overfishing": "Overfishing depletes fish populations and disrupts the balance of marine ecosystems.",
+            "marine protected areas": "Marine protected areas help conserve marine biodiversity and replenish fish stocks."
+        };
+        
+        function sendMessage() {
+            const userInput = document.getElementById("userInput").value.toLowerCase();
+            const chatBox = document.getElementById("chatBox");
+            
+            if (userInput.trim() === "") return;
+            
+            chatBox.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
+            
+            let response = marineData[userInput] || "I'm not sure about that, but marine conservation is important!";
+            chatBox.innerHTML += `<p><strong>Bot:</strong> ${response}</p>`;
+            
+            document.getElementById("userInput").value = "";
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
+  </body>
+</html>
